@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import store from '../../utils/store'
+import { useSelector } from 'react-redux'
 
 function CategoryMenu() {
-  const [state, dispatch] = useStoreContext();
+  const state = store.getState()
+  const cartOpen = useSelector(state => state.cartOpen)
 
   const { categories } = state;
 
@@ -14,7 +16,7 @@ function CategoryMenu() {
 
   useEffect(() => {
     if (categoryData) {
-      dispatch({
+      store.dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
       });
@@ -23,16 +25,16 @@ function CategoryMenu() {
       });
     } else if (!loading) {
       idbPromise('categories', 'get').then(categories => {
-        dispatch({
+        store.dispatch({
           type: UPDATE_CATEGORIES,
           categories: categories
         });
       });
     }
-  }, [categoryData, loading, dispatch]);
+  }, [categoryData, loading, cartOpen]);
 
   const handleClick = id => {
-    dispatch({
+    store.dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id
     });
