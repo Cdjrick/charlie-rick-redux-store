@@ -16,7 +16,7 @@
 ### Use npm install to install all dependencies, server and client.
 
 ### Github: https://github.com/Cdjrick/charlie-rick-redux-store
-### Deployed: https://cdjrick.github.io/charlie-rick-redux-store/
+### Deployed: https://charlie-rick-redux-store.herokuapp.com/
     
     
 
