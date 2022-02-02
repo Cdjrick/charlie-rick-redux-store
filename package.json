@@ -4,12 +4,12 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod && cd server && npm run seed|| npm run start:dev",
-    "start:prod": "cd server && npm start && npm run seed",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
     "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed && npm run seed",
-    "heroku-postbuild": "cd client && npm run build && npm run seed",
+    "seed": "cd server && npm run seed",
+    "heroku-postbuild": "cd client && npm run build",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
